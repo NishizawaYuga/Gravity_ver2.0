@@ -22,15 +22,23 @@ public class PlayerMove : MonoBehaviour
     [Tooltip("カメラ")]
     private GameObject mainCamera;
 
+    //カメラ
+    [SerializeField]
+    [Tooltip("接地判定")]
+    private GameObject groundCheck;
+
     //スクリプト
     PlayerController script;
     UnderCollider underCollider;
     private CaemeraFollowTarget cF;     //カメラ追従制御
+    GroundCheck gc;
 
     //ジャンプフラグ
     bool isJump = false;
     //ジャンプ時の勢い
     float jumpPower = 3f;
+
+    bool push = false;
 
     public AudioSource seJump;
     public AudioSource seOnArrow;
@@ -52,6 +60,7 @@ public class PlayerMove : MonoBehaviour
         script = target.GetComponent<PlayerController>();
         underCollider = target.GetComponent<UnderCollider>();
         cF = mainCamera.GetComponent<CaemeraFollowTarget>();
+        gc = groundCheck.GetComponent<GroundCheck>();
     }
 
     // Update is called once per frame
@@ -63,6 +72,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //isJump = gc.IsGround();
         if (isGoal)
         {
             GoalRotation(target.GetComponent<PlayerController>().GetNum());
@@ -83,6 +93,21 @@ public class PlayerMove : MonoBehaviour
                 {
                     invincible = false;
                     invincibleTimer = 30;
+                }
+            }
+
+            if (!Input.GetKey(KeyCode.Space) && Gamepad.current == null)
+            {
+                if (push)
+                {
+                    push = false;
+                }
+            }
+            else if(!Gamepad.current.bButton.isPressed && Gamepad.current != null)
+            {
+                if (push)
+                {
+                    push = false;
                 }
             }
         }
@@ -151,12 +176,14 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            if (isJump)
+            if (isJump && !push && Gamepad.current == null)
             {
+                push = true;
                 seJump.Play();
                 if (script.GetNum() % 2 == 0)
                 {
                     return jumpPower;
+                    //rb.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
                 }
                 else if (script.GetNum() % 2 == 1)
                 {
@@ -168,8 +195,9 @@ public class PlayerMove : MonoBehaviour
         {
             if (Gamepad.current.bButton.isPressed)
             {
-                if (isJump)
+                if (isJump && !push)
                 {
+                    push = true;
                     seJump.Play();
                     if (script.GetNum() % 2 == 0)
                     {

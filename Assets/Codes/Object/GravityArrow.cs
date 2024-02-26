@@ -87,6 +87,7 @@ public class GravityArrow : MonoBehaviour
             }
             else
             {
+                player.GetComponent<PlayerController>().SendCanMoveFlag(false);
                 isRotate = true;
                 nowTime = 0;
                 //isStartUp = false;
@@ -123,7 +124,7 @@ public class GravityArrow : MonoBehaviour
             else
             {
                 //cF.ChangeCameraRotation(endDirection);
-
+                player.GetComponent<PlayerController>().SendCanMoveFlag(true);
                 rotateTime = 0f;
                 isRotate = false;
                 alreadyStarted = true;
