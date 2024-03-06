@@ -12,7 +12,6 @@ public class Enemy_GreenVirus : MonoBehaviour
     private Rigidbody rb;
 
     public GameObject player;
-    private PlayerController pCon;
 
     private float speed = 0.01f;
 
@@ -30,12 +29,14 @@ public class Enemy_GreenVirus : MonoBehaviour
 
     private float knockBack = 1f;
 
+    private StartSpinhit ssh;
+
     void Start()
     {
         TryGetComponent(out rb);
         me = this.gameObject;
         cg = me.GetComponent<ChangeGravity>();
-        pCon = player.GetComponent<PlayerController>();
+        ssh = me.GetComponent<StartSpinhit>();
     }
 
     // Update is called once per frame
@@ -249,6 +250,7 @@ public class Enemy_GreenVirus : MonoBehaviour
             {
                 isDeath = true;
                 damage.Play();
+                ssh.ParticleStart();
                 if (collision.gameObject.tag == "Player")
                 {
                     rb.velocity = Vector3.zero;
@@ -262,6 +264,7 @@ public class Enemy_GreenVirus : MonoBehaviour
         if (collision.gameObject.tag == "PAttack")
         {
             damage.Play();
+            ssh.ParticleStart();
             isDeath = true;
         }
     }
@@ -270,7 +273,8 @@ public class Enemy_GreenVirus : MonoBehaviour
     {
         if(other.gameObject.tag == "PAttack")
         {
-            isDeath=true;
+            ssh.ParticleStart();
+            isDeath =true;
             rb.velocity = Vector3.zero;
 
             Vector3 distination = (me.transform.position - other.transform.position).normalized;

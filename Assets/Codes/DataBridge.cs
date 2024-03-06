@@ -2,27 +2,26 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEditor;
 
-namespace CourseStates
+public class DataBridge : MonoBehaviour
 {
-    public class DataBridge
-    {
+    [SerializeField]
+    [Tooltip("ワールド数")]
+    int WorldNum;
 
-        private const int maxWorld = 5;
-        private const int maxCourse = 5;
-        //コースのクリア状況
-        public static bool[,] courseClear = new bool[5, 5];
-        //コースの中間状況
-        public static int[,] middle = new int[5, 5];
-        private static void Start()
-        {
-            for (int i = 0; i < maxWorld; i++)
-            {
-                for (int j = 0; j < maxCourse; j++)
-                {
-                    courseClear[i, j] = false;
-                    middle[i, j] = 0;
-                }
-            }
-        }
+    [SerializeField]
+    [Tooltip("コース数")]
+    int CourceNum;
+
+    //セーブデータ
+    private DataSave dSave;
+    //ステージ側専用
+    private void Start()
+    {
+        dSave = this.GetComponent<DataSave>();
     }
+
+//    public bool CheckIsGetCrystal(int CrystalNum)
+//    {
+//        //return dSave.GetCrystalData(WorldNum, CourceNum, CrystalNum);
+//    }
 }

@@ -58,6 +58,16 @@ public class PlayerController : MonoBehaviour
 
     private float plTurn = 225;
 
+    public enum GravityDirection
+    {
+        down,
+        up,
+        left,
+        right,
+        flont,
+        back
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -136,27 +146,27 @@ public class PlayerController : MonoBehaviour
 
     public void ManualTurn(int gravityNum)
     {
-        if (gravityNum == 0)
+        if (gravityNum == int.Parse(GravityDirection.down.ToString()))
         {
             player.transform.rotation = Quaternion.Euler(0, plTurn, 0);
         }
-        else if (gravityNum == 1)
+        else if (gravityNum == int.Parse(GravityDirection.up.ToString()))
         {
             player.transform.rotation = Quaternion.Euler(0, -plTurn, 180);
         }
-        else if (gravityNum == 2)
+        else if (gravityNum == int.Parse(GravityDirection.left.ToString()))
         {
             player.transform.rotation = Quaternion.Euler(plTurn, 0, -90);
         }
-        else if (gravityNum == 3)
+        else if (gravityNum == int.Parse(GravityDirection.right.ToString()))
         {
             player.transform.rotation = Quaternion.Euler(-plTurn, 0, 90);
         }
-        else if (gravityNum == 4)
+        else if (gravityNum == int.Parse(GravityDirection.flont.ToString()))
         {
             player.transform.rotation = Quaternion.Euler(-90, 0, -plTurn);
         }
-        else if (gravityNum == 5)
+        else if (gravityNum == int.Parse(GravityDirection.back.ToString()))
         {
             player.transform.rotation = Quaternion.Euler(90, 0, plTurn);
         }

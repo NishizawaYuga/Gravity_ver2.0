@@ -27,6 +27,8 @@ public class monitor : MonoBehaviour
 
     private bool playSE= false;
 
+    private bool viewStart = false;
+
     void Start()
     {
         ease = new Easing();
@@ -51,8 +53,11 @@ public class monitor : MonoBehaviour
             {
                 seMonitor.Play();
                 playSE = true;
+                viewStart = true;
             }
-
+        }
+        if (viewStart)
+        {
             if (!viewMode)
             {
                 if (timer < maxTimer)

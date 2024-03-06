@@ -14,6 +14,14 @@ public class crystal : MonoBehaviour
     [Tooltip("変わる箇所は回転方向")]
     private int direction;
 
+    [SerializeField]
+    [Tooltip("番号 0～2")]
+    int crystalNum;
+
+    [SerializeField]
+    [Tooltip("ゲームマネージャー")]
+    GameObject gameManager;
+
     public AudioSource secrystal;
 
     private bool isGet = false;
@@ -26,6 +34,11 @@ public class crystal : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (gameManager.GetComponent<DataSave>().GetCrystalData(crystalNum) && !isGet)
+        {
+            crystalObj.transform.position = new Vector3(0f, 0f, 0f);
+            isGet = true;
+        }
         rotY += 2f;
         if (direction == 0)
         {
@@ -63,6 +76,7 @@ public class crystal : MonoBehaviour
         isGet = true;
         crystalObj.transform.position = new Vector3(0f, 0f, 0f);
         secrystal.Play();
+        gameManager.GetComponent<DataSave>().GetCrystal(crystalNum);
     }
 
     public bool IsGet()

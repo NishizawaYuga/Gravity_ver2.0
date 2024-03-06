@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 6347455397395956018}
   - component: {fileID: 6347455397395956023}
   - component: {fileID: 6347455397395956020}
+  - component: {fileID: 2906574291301457813}
   m_Layer: 0
   m_Name: enemy_greenvirus
   m_TagString: Enemy
@@ -707,6 +708,19 @@ MonoBehaviour:
   player: {fileID: 0}
   damage: {fileID: 6347455397395956018}
   down: {fileID: 6347455397395956021}
+--- !u!114 &2906574291301457813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6113593459097923490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82a0c9edde0d5ac4484640988d6582d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle: {fileID: 3352707293534886574, guid: 8324d3fda5ec0c346a90fa848be5bf1c, type: 3}
 --- !u!1 &6581362998613935633
 GameObject:
   m_ObjectHideFlags: 0

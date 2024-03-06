@@ -421,6 +421,8 @@ GameObject:
   - component: {fileID: 3636631201052211127}
   - component: {fileID: 3636631201052211120}
   - component: {fileID: 3636631201052211121}
+  - component: {fileID: -3503935054150320965}
+  - component: {fileID: -7037415129812653316}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -543,6 +545,7 @@ MonoBehaviour:
   moveSpeed: 3
   target: {fileID: 4518941244955562347}
   mainCamera: {fileID: 0}
+  groundCheck: {fileID: 0}
   seJump: {fileID: 0}
   seOnArrow: {fileID: 0}
   seDamage: {fileID: 0}
@@ -577,6 +580,31 @@ MonoBehaviour:
   rigidbody: {fileID: 3636631201052211126}
   spinEffect: {fileID: 0}
   seSpin: {fileID: 0}
+--- !u!114 &-3503935054150320965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4518941244955562347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82a0c9edde0d5ac4484640988d6582d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle: {fileID: 6318143688770050954, guid: c7d0a5ccb50cf2d4ea66c7cffd72e6d0, type: 3}
+--- !u!114 &-7037415129812653316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4518941244955562347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f29961b951729f4ba7b645c304e5e36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5881496609186132580
 GameObject:
   m_ObjectHideFlags: 0

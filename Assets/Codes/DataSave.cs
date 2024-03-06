@@ -62,7 +62,7 @@ public class DataSave : MonoBehaviour
                 {
                     while (fs.Peek() != -1)
                     {
-                        string data = fs.ReadLine();                        
+                        string data = fs.ReadLine();
                         courseClear[worldNum, courseNum] = int.Parse(data[0].ToString());
                         getCrystal[worldNum, courseNum, 0] = int.Parse(data[1].ToString());
                         getCrystal[worldNum, courseNum, 1] = int.Parse(data[2].ToString());
@@ -90,13 +90,9 @@ public class DataSave : MonoBehaviour
         //}
     }
 
-    public void Save(bool isGetCrystal,int nowCrystalNum)
+    public void Save()
     {
         courseClear[thisWorld, thisCourse] = 1;
-        if (isGetCrystal)
-        {
-            getCrystal[thisWorld, thisCourse, nowCrystalNum] = 1;
-        }
         //データ更新が終わったらtxtにデータ保存
         //データ格納パス
         string path = Application.persistentDataPath + "/savedata.gvsv";
@@ -112,6 +108,45 @@ public class DataSave : MonoBehaviour
                     fs.Write(getCrystal[i, j, 2] + "\n");
                 }
             }
+        }
+    }
+
+    public void DataDelete()
+    {
+        //セーブデータ消去
+        string path = Application.persistentDataPath + "/savedata.gvsv";
+        using (var fs = new StreamWriter(path, isAppend, System.Text.Encoding.GetEncoding("UTF-8")))
+        {
+            for (int i = 0; i < maxWorld; i++)
+            {
+                for (int j = 0; j < maxCourse; j++)
+                {
+                    fs.Write(0);
+                    fs.Write(0);
+                    fs.Write(0);
+                    fs.Write(0 + "\n");
+                }
+            }
+        }
+    }
+
+    //クリスタルゲット
+    public void GetCrystal(int crystalNum)
+    {
+        getCrystal[thisWorld, thisCourse, crystalNum] = 1;
+    }
+
+    //データ取得
+    public bool GetCrystalData(int crystalNum)
+    {
+        //Debug.Log(getCrystal[thisWorld, thisCourse, 0]); 
+        if (getCrystal[thisWorld, thisCourse, crystalNum] == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 }

@@ -12,7 +12,7 @@ public class Goal : MonoBehaviour
     bool isClear = false;
 
     //クリア後処理
-    private int waitTimer = 300;
+    private int waitTimer = 180;
     private const int maxWaitTimer = 300;
 
     GameObject goal;
@@ -20,6 +20,10 @@ public class Goal : MonoBehaviour
     [SerializeField]
     [Tooltip("変わる箇所は回転方向")]
     private int direction;
+
+    [SerializeField]
+    [Tooltip("ゲームマネージャー")]
+    GameObject gameManager;
 
     public AudioSource seGoal;
 
@@ -70,6 +74,7 @@ public class Goal : MonoBehaviour
         goal.transform.position = new Vector3(0f, 0f, 0f);
         isClear = true;
         seGoal.Play ();
+        gameManager.GetComponent<DataSave>().Save();
     }
     private void GoalScene()
     {

@@ -53,6 +53,15 @@ public class PlayerMove : MonoBehaviour
 
     bool isGoal = false;
 
+    private StartSpinhit ssh;
+
+    private ModelColorChange mcc;
+
+    //–³“G•\Ž¦
+    //private Color32[,] DefaultColors = new Color32[7];
+    private Color32 test;
+    float testTimer;
+
     void Start()
     {
         TryGetComponent(out rb);
@@ -61,6 +70,8 @@ public class PlayerMove : MonoBehaviour
         underCollider = target.GetComponent<UnderCollider>();
         cF = mainCamera.GetComponent<CaemeraFollowTarget>();
         gc = groundCheck.GetComponent<GroundCheck>();
+        ssh = target.GetComponent<StartSpinhit>();
+        mcc = target.GetComponent<ModelColorChange>();
     }
 
     // Update is called once per frame
@@ -72,6 +83,8 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //transform.Find("eye").gameObject.GetComponent<Renderer>().material.color = new Color32(255, 0, 0, 0);
+        //testTimer+=0.01f;
         //isJump = gc.IsGround();
         if (isGoal)
         {
@@ -103,7 +116,7 @@ public class PlayerMove : MonoBehaviour
                     push = false;
                 }
             }
-            else if(!Gamepad.current.bButton.isPressed && Gamepad.current != null)
+            else if(!Gamepad.current.bButton.isPressed && !Input.GetKey(KeyCode.Space) && Gamepad.current != null)
             {
                 if (push)
                 {
@@ -176,7 +189,7 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            if (isJump && !push && Gamepad.current == null)
+            if (isJump && !push)
             {
                 push = true;
                 seJump.Play();
@@ -335,6 +348,7 @@ public class PlayerMove : MonoBehaviour
                 {
                     seDamage.Play();
                     life--;
+                    ssh.ParticleStart();
 
                     if (life <= 0 && !invincible && !script.IsDead())
                     {
